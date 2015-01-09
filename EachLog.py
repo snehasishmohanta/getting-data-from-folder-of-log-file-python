@@ -1,4 +1,4 @@
-""" as i am having a folder which contain some log files. from this folder i need to extract the values of timestand , initial query and numof sugessions from each log file.
+""" as i am having a folder which contain some log files. from this folder i need to extract the values of timestand , initial query and numof sugessions and the count of query inputed by user if it is repeated from each log file.
 here inside the folder i am having some log file "/home/snehasish/log/autosuggest1"
 inside that i am having log files like below.
 snehasish@ip-10-0-67-159:~/log/autosuggest1$ ls
