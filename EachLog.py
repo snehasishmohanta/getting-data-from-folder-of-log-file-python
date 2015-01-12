@@ -12,25 +12,31 @@ nginx.log.2014-12-17-04  nginx.log.2014-12-17-09  nginx.log.2014-12-17-14  nginx
 what i need to do is to go through each log file and find out the require thing.
 """
 # below is the code
-
 import re
 import os
 auto_prefix = u'\u200B'
-from collections import Counter
-path = "/home/snehasish/log/autosuggest1/"
 
-for path, dirs, files in os.walk(path):
+path1 = "/home/snehasish/log/autosuggest1/"
+path2 = "/home/snehasish/log/autosuggest2/"
+for path, dirs, files in os.walk(path1):
         for data in files:
                 with open("/home/snehasish/log/autosuggest1/"+data) as text:
                         for line in text:
                                 date = re.match("^\[.*?]",line)
                                 Iq = re.match(".*?Input query[^:]*:(.*?,)", line)
                                 Ns = re.match(".*?NumSuggestions[^:]*:(.*?,)", line)
-
-
-                                if date and Iq and Ns :
+                                if date and Iq:
                                         q = Iq.group(1)
                                         q = q.decode('utf-8').replace(auto_prefix, "")
-                                        result = Counter(q.encode('utf-8')).most_common()
-                                        for date, Iq, Ns, freq in result:
-                                                print date.group(0),q.encode('utf-8'),Ns.group(1),freq
+                                        print date.group(0),",",q.encode('utf-8'),Ns.group(1)
+for path, dirs, files in os.walk(path2):
+        for data in files:
+                with open("/home/snehasish/log/autosuggest2/"+data) as text:
+                        for line in text:
+                                date = re.match("^\[.*?]",line)
+                                Iq = re.match(".*?Input query[^:]*:(.*?,)", line)
+                                Ns = re.match(".*?NumSuggestions[^:]*:(.*?,)", line)
+                                if date and Iq:
+                                        q = Iq.group(1)
+                                        q = q.decode('utf-8').replace(auto_prefix, "")
+                                        print date.group(0),",",q.encode('utf-8'),Ns.group(1)
